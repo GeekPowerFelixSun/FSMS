@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSMS.Cache.Factory\FSMS.Cache.Factory.csproj" />
+    <ProjectReference Include="..\FSMS.Entity\FSMS.Entity.csproj" />
+    <ProjectReference Include="..\FSMS.Service\FSMS.Service.csproj" />
+  </ItemGroup>
+
+</Project>

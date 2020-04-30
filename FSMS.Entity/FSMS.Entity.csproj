@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSMS.IdGenerator\FSMS.IdGenerator.csproj" />
+    <ProjectReference Include="..\FSMS.Util\FSMS.Util.csproj" />
+    <ProjectReference Include="..\FSMS.Web.Code\FSMS.Web.Code.csproj" />
+  </ItemGroup>
+
+</Project>

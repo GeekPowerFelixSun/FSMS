@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSMS.Cache.Interface\FSMS.Cache.Interface.csproj" />
+    <ProjectReference Include="..\FSMS.MemoryCache\FSMS.MemoryCache.csproj" />
+  </ItemGroup>
+
+</Project>

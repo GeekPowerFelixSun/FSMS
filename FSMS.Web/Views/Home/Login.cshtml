@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "FSMS管理系统 - 登录";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment
+@section header{
+    <link href='@Url.Content("~/fsms/css/login.css")' rel="stylesheet" />
+    <script>
+        if (window.top !== window.self) {window.top.location = window.location };    // { alert('未登录或登录超时。请重新登录');
+    </script>
+    @BundlerHelper.Render(HostingEnvironment.ContentRootPath, Url.Content("~/lib/jquery.validation/1.14.0/jquery.validate.min.js"))
+}
+
+<div class="login-panel">
+    <div class="row section">
+        <div class="col-sm-8">
+            <div class="login-info">
+                <div class="logopanel m-b">
+                    <h1><img alt="[ATS]" src="~/image/logo.png" height="45"></h1>
+                </div>
+                <div class="m-b">
+                    <h4>欢迎使用 FSMS管理系统 </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <form id="form">
+                <h4 class="no-margin">登录：</h4>
+                <p class="m-t-md">没有尽力而为，只有全力以赴。</p>
+                <p>用户名：admin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：123456</p>
+                <input id="userName" name="userName" class="form-control uname" col="UserName" type="text" placeholder="用户名" value="@ViewBag.UserName" />
+                <input id="password" name="password" class="form-control pword m-b" col="Password" type="password" placeholder="密码" value="@ViewBag.Password" />
+                <div class="row">
+                    <div class="col-xs-6">
+                        <input id="captchaCode" name="captchaCode" type="text" col="CaptchaCode" class="form-control code" placeholder="验证码" maxlength="3">
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="javascript:void(0);" title="点击更换验证码">
+                            <img id="imgCaptchaCode" src='@Url.Content("~/Home/GetCaptchaImage")' height="34" />
+                        </a>
+                    </div>
+                </div>
+                <div class="checkbox-custom">
+                    <input id="rememberMe" name="rememberMe" type="checkbox"> <label for="rememberMe">记住我</label>
+                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
+                    @*<a class="btn btn-white btn-bitbucket" href="www.xx.com" target="_blank"><i class="fa fa-home"></i> 注册 </a>*@
+                </div>
+                <button class="btn btn-success btn-block" onclick="loginForm(); return false;">登录</button>
+            </form>
+        </div>
+    </div>
+    <div class="login-footer">
+        <div style="text-align:center">
+            &copy; 2019-@DateTime.Now.Year All Rights Reserved. <a href="http://www.baidu.com" target="_blank" style="color:white">ATS Co.</a><br>
+            @*<a href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">沪ICP备18018970号-1</a><br>*@
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        if ($.cookie('RememberMe') == 1) {
+            $("#rememberMe").prop("checked", true);
+            if ("@GlobalContext.SystemConfig.LoginProvider" == "Cookie") {
+                if (!ys.isNullOrEmpty($.cookie('UserToken'))) {
+                    redirectToIndex();
+                }
+            }
+            else {
+                $.removeCookie("UserToken", { path: '/' });
+            }
+        }
+        $("#rememberMe").click(function () {
+            if ($(this).prop("checked")) {
+                $.cookie('RememberMe', 1, { expires: 30, path: '/' });
+            }
+        });
+
+        $("#imgCaptchaCode").click(function () {
+            $(this).attr("src", '@Url.Content("~/Home/GetCaptchaImage")' + '?t=' + new Date().getTime());
+        });
+
+        $("#form").validate({
+            rules: {
+                userName: { required: true },
+                password: { required: true }
+            }
+        });
+
+        $.validator.setDefaults({
+            submitHandler: function () {
+                loginForm();
+            }
+        });
+    });
+
+    function loginForm() {
+        if ($("#form").validate().form()) {
+            var postData = $("#form").getWebControls();
+            ys.ajax({
+                url: '@Url.Content("~/Home/LoginJson")',
+                type: "post",
+                data: postData,
+                success: function (obj) {
+                    if (obj.Tag == 1) {
+                        ys.msgSuccess(obj.Message);
+                        redirectToIndex();
+                        @*{
+                            location.href = '@Url.Content("~/Home/Index")';
+                        }*@
+                    }
+                    else {
+                        ys.msgError(obj.Message);
+                    }
+                }
+            });
+        }
+    }
+
+    //return redirectToIndex("~/Home/Index");
+    function redirectToIndex() {
+        location.href = '@Url.Content("~/Home/Index")';
+    }
+</script>
+
+
+
+
+

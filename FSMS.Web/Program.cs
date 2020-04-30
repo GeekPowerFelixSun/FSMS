@@ -19,6 +19,7 @@ namespace FSMS.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                   .UseUrls("http://*:5100")
+                   .UseStartup<Startup>();
     }
 }

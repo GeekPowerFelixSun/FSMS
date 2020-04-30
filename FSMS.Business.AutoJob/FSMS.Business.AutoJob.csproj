@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Quartz" Version="3.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSMS.Business\FSMS.Business.csproj" />
+    <ProjectReference Include="..\FSMS.Entity\FSMS.Entity.csproj" />
+    <ProjectReference Include="..\FSMS.Service\FSMS.Service.csproj" />
+    <ProjectReference Include="..\FSMS.Util\FSMS.Util.csproj" />
+  </ItemGroup>
+
+</Project>

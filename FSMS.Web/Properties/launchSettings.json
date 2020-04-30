@@ -3,8 +3,8 @@
     "windowsAuthentication": false, 
     "anonymousAuthentication": true, 
     "iisExpress": {
-      "applicationUrl": "http://localhost:64307",
-      "sslPort": 44341
+      "applicationUrl": "http://localhost:5100",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -18,10 +18,11 @@
     "FSMS.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5100"
+
     }
   }
 }
